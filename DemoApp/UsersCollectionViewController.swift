@@ -31,7 +31,7 @@ class UsersCollectionViewController: UICollectionViewController {
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        self.refresh { [unowned self] in
+        self.refresh {[unowned self] in
             DispatchQueue.main.async {
                 self.usersCollectionView.reloadData()
             }
@@ -41,10 +41,10 @@ class UsersCollectionViewController: UICollectionViewController {
     }
     
     func refresh(_ completion: @escaping () -> Void) {
-        client.fetchUsers { data in
-            if let usersParsed =  parser.parseUserFromJson(json: JSON(data!)) {
-                self.users = usersParsed
-            }
+        client.fetchUsers { [unowned self] data in
+    
+            self.users =  self.parser.downloadAllUsers(jsonData: data!)
+            print(self.users)
             completion()
         }
     }
@@ -112,38 +112,5 @@ class UsersCollectionViewController: UICollectionViewController {
         
         return CGFloat(MINIMUM_INTERIMITEM_SPACE)
     }
-    
-    
-    
-    // MARK: - UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
 
 }

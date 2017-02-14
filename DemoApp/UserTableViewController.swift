@@ -14,7 +14,7 @@ class UserTableViewController: UITableViewController {
 
     @IBOutlet var userTableView: UITableView!
     
-    
+    var users = [User]()
     override func viewDidLoad() {
         super.viewDidLoad()
 

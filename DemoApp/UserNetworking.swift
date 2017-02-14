@@ -11,6 +11,38 @@ import SwiftyJSON
 import Alamofire
 
 class UserNetworking {
+    lazy var configuration: URLSessionConfiguration = URLSessionConfiguration.default
+    lazy var session: URLSession = URLSession(configuration: self.configuration)
+    
+    typealias ImageDataHandler = ((Data) -> Void)
+    
+    func downloadImage(_ completion: @escaping ImageDataHandler)
+    {
+        let urlString = "https://randomuser.me/api/?page=0&results=100&seed=abc"
+        let url = URL(string: urlString)
+        let request = URLRequest(url: url!)
+        let dataTask = session.dataTask(with: request, completionHandler: { (data, response, error) in
+        
+        if error == nil {
+        if let httpResponse = response as? HTTPURLResponse {
+        switch (httpResponse.statusCode) {
+        case 200:
+            if let data = data {
+                completion(data)
+            }
+        default:
+            print(httpResponse.statusCode)
+            }
+           }
+        } else {
+            print("Error: \(error?.localizedDescription)")
+            }
+        })
+        
+        dataTask.resume()
+    }
+    
+    
     func fetchUsers(_ completion: @escaping (Data?) -> Void) {
         let urlString = "https://randomuser.me/api/?page=0&results=100&seed=abc"
         
@@ -35,4 +67,9 @@ class UserNetworking {
         task.resume()
         
     }
+
 }
+
+
+
+

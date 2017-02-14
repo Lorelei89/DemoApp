@@ -12,52 +12,33 @@ import SwiftyJSON
 class UserParser {
     var users  = [User]()
     
-    func parseUserFromJson(json: JSON) ->[User]  {
-        print(json.type)
-        if let userArray = json.array {
-            for user in userArray {
-                let userClass = User()
-                if let userParentDictonary = user.dictionary {
-                    if let userInfo = userParentDictonary["results"]?.dictionary {
-                        if let gender = userInfo["gender"]?.string {
-                            userClass.gender = gender
-                        }
-                        
-                        if let name = userInfo["name"]?.dictionary {
-                            userClass.name = name
-                        }
-                        if let location = userInfo["location"]?.dictionary {
-                            userClass.location = location
-                        }
-                        
-                        if let email = userInfo["email"]?.string {
-                            userClass.email = email
-                        }
-                        if let login = userInfo["login"]?.dictionary {
-                            userClass.login = login
-                        }
-                        
-                        if let phone = userInfo["phone"]?.string {
-                            userClass.phone = phone
-                        }
-                        if let id = userInfo["id"]?.string {
-                            userClass.id = id
-                        }
-                        
-                        if let picture = userInfo["picture"]?.dictionary {
-                            userClass.picture = picture
-                        }
-                        
-                        if let nationality = userInfo["nat"]?.string {
-                            userClass.nationality = nationality
-                        }
-                    }
-                }
-                self.users.append(userClass)
+    func parseJSONFromData(_ jsonData: Data?) -> [String : AnyObject]?
+    {
+        if let data = jsonData {
+            do {
+                let jsonDictionary = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers) as? [String : AnyObject]
+                return jsonDictionary
+                
+            } catch let error as NSError {
+                print("error processing json data: \(error.localizedDescription)")
             }
         }
-        return self.users
+        
+        return nil
     }
     
+    func downloadAllUsers(jsonData:Data?) -> [User]
+    {
+        
+        if let jsonDictionary = self.parseJSONFromData(jsonData) {
+            let usersDictionaries = jsonDictionary["results"] as! [[String : AnyObject]]
+            for userDictionary in usersDictionaries {
+                let newUser = User(userDictionary: userDictionary)
+                self.users.append(newUser)
+            }
+        }
+        
+        return self.users
+    }
     
 }
