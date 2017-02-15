@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DemoApp/UsersCollectionViewController.swift"
-            timestampString = "508805337.465872"
+            filePath = "DemoApp/UserParser.swift"
+            timestampString = "508855090.738031"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "refresh(_:)"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "swiftyJSONResponseHandler(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

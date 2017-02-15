@@ -43,7 +43,7 @@ class UsersCollectionViewController: UICollectionViewController {
     func refresh(_ completion: @escaping () -> Void) {
         client.fetchUsers { [unowned self] data in
     
-            self.users =  self.parser.downloadAllUsers(jsonData: data!)
+            self.users =  self.parser.swiftyJSONResponseHandler(data!)
             print(self.users)
             completion()
         }

@@ -7,45 +7,51 @@
 //
 
 import Foundation
+struct User {
+    var gender: String
+    var name: UserNameSwiftyJSON
+    var location: UserLocationSwiftyJSON
+    var email: String
+    var login: UserLoginSwiftyJSON
+    var phone:String
+    var id:UserIdSwiftyJSON
+    var picture: UserPictureSwiftyJSON
+    var nationality:String
+    
+//    init(gender: String, name: [String:AnyObject], location: [String:AnyObject], email: String, login:  [String:AnyObject], phone:String, id:String, picture:[String:AnyObject], nationality:String)
+//        {
+//        self.gender = gender
+//        self.name = name
+//        self.location = location
+//        self.email = email
+//        self.login = login
+//        self.phone = phone
+//        self.id = id
+//        self.picture = picture
+//        self.nationality = nationality
+//    }
+    
+    
+//    init(userDictionary: [String:AnyObject])
+//    {
+//        gender = userDictionary["gender"] as? String
+//        name = userDictionary["name"] as? [String:AnyObject]
+//        location = userDictionary["location"] as? [String:AnyObject]
+//        email = userDictionary["email"] as? String
+//        login = userDictionary["login"] as? [String:AnyObject]
+//        phone = userDictionary["phone"] as? String
+//        id = userDictionary["id"] as? String
+//        picture = userDictionary["id"] as?  [String:AnyObject]
+//        nationality = userDictionary["nat"] as? String
+//    }
+    
+    
+}
 
-class User {
-    var gender: String?
-    var name: [String:AnyObject]?
-    var location: [String:AnyObject]?
-    var email: String?
-    var login: [String:AnyObject]?
-    var phone:String?
-    var id:String?
-    var picture: [String:AnyObject]?
-    var nationality:String?
+
+extension User: CustomStringConvertible {
     
-    init(gender: String, name: [String:AnyObject], location: [String:AnyObject], email: String, login:  [String:AnyObject], phone:String, id:String, picture:[String:AnyObject], nationality:String)
-        {
-        self.gender = gender
-        self.name = name
-        self.location = location
-        self.email = email
-        self.login = login
-        self.phone = phone
-        self.id = id
-        self.picture = picture
-        self.nationality = nationality
+    var description: String {
+        return "User - gender: \(gender)\nname: \(name)\nlocation: \(location)\nemail: \(email)\nlogin: \(login)\nphone:\(phone)\nid:\(id)\npicture:\(picture)\nnationality:\(nationality)"
     }
-    
-    
-    init(userDictionary: [String:AnyObject])
-    {
-        gender = userDictionary["gender"] as? String
-        name = userDictionary["name"] as? [String:AnyObject]
-        location = userDictionary["location"] as? [String:AnyObject]
-        email = userDictionary["email"] as? String
-        login = userDictionary["login"] as? [String:AnyObject]
-        phone = userDictionary["phone"] as? String
-        id = userDictionary["id"] as? String
-        picture = userDictionary["id"] as?  [String:AnyObject]
-        nationality = userDictionary["nat"] as? String
-    }
-    
-    
-    
 }
